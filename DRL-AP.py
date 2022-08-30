@@ -154,31 +154,30 @@ def startTrain(model):
 def startTrainCode(model):
 
     if model == 'logical_attack':
-        print("--------------------------------------------------------------------------------")
-        print("DRL-AP: Compute attack path for logical network...")
+        print("----------------------------------------------------")
+        print("DRL-AP: Computing attack path for logical network...")
         env = Environment(loader=FileSystemLoader('./'+TOPOLOGY_PATH), autoescape=select_autoescape('P'))
         template = env.get_template(LOGICAL_ATTACK_TOPOLOGY)
         startTrain('logical_attack')
     elif model == 'logical_attack_gen':
-        print("--------------------------------------------------------------------------------")
+        print("----------------------------------------------------")
         print("DRL-AP: Load vulnerability information...")
         saveVul()
-        print("--------------------------------------------------------------------------------")
+        print("----------------------------------------------------")
         print("DRL-AP: Populate topology with vulnerabilities...")
         createTemp_tem()
-        print("--------------------------------------------------------------------------------")
+        print("----------------------------------------------------")
         print("DRL-AP: Compute attack path for generated logical network...")
         startTrain('logical_attack_gen')
 
 
 def startTemCode():
-    print("--------------------------------------------------------------------------------")
+    print("----------------------------------------------------")
     print("DRL-AP: Create random topology using topology-generator...")
     os.chdir('./Topology_generator/topology-generator')
     os.system('python2 topo-gen.py -c ../topo-gen-config -o top_info')
     print("Saved topology in 'Topology_generator/topology-generator/top_info_1.json'.")
-
-    print("--------------------------------------------------------------------------------")
+    print("----------------------------------------------------")
     print("DRL-AP: Convert random topology to MulVAL topology...")
     os.chdir('../')
     status = os.system('python3 topo_proc.py')
@@ -191,7 +190,7 @@ def startTemCode():
 
 
 def startRealAttackCode():
-    print("--------------------------------------------------------------------------------")
+    print("----------------------------------------------------")
     print("DRL-AP: Get vulnerabilities in target network using Nmap...")
     os.chdir('./Nmap_scan')
     status = os.system('python3 create_top.py')
@@ -199,23 +198,22 @@ def startRealAttackCode():
         print("DRL-AP: Nmap scanning failed => abort")
         return
 
-    print("--------------------------------------------------------------------------------")
+    print("----------------------------------------------------")
     print("DRL-AP: Generate attack graph using MulVAL...")
     os.system('rm -f ../mulval_result/*.*')
     os.chdir('../mulval_result')
     os.system('../repos/mulval/utils/graph_gen.sh ../Nmap_scan/attack.P -v')
 
-    print("--------------------------------------------------------------------------------")
+    print("----------------------------------------------------")
     print("DRL-AP: Compute attack path for real network...")
     os.chdir('../')
     startTrain('nmap')
 
-    print("--------------------------------------------------------------------------------")
+    print("----------------------------------------------------")
     print("DRL-AP: Perform penetration testing using Metasploit...")
     os.chdir('./Penetration_tools')
     os.system('python3 ./start_attack.py')
     os.chdir('../')
-
 
 def start_function(model):
 
@@ -237,9 +235,9 @@ def start_function(model):
 
 if __name__ == '__main__':
     try:
-        print("################################################################################")
+        print("====================================================")
         print("DRL-AP: Automated Penetration Testing Using Deep Reinforcement Learning")
-        print("################################################################################")
+        print("====================================================")
         if len(sys.argv) != 2:
             print("ERROR: The operation mode must be specified:")
             print("       $ python3 ./DRL-AP.py <OPERATION_MODE>")
