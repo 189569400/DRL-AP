@@ -1,3 +1,7 @@
+#
+# Create topo file.
+#
+
 import os
 import sys
 import csv

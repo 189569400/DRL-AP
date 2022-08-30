@@ -1,4 +1,8 @@
-#coding:utf8
+#
+# Get topo infomation from nmap.txt
+# Note: coding:utf8
+#
+
 import re
 import sys
 
