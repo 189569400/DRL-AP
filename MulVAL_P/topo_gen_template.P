@@ -1,3 +1,4 @@
+
 attackerLocated(internet).
 attackGoal(execCode({{end}},_)).
 
