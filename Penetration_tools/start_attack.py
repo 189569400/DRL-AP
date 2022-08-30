@@ -1,3 +1,7 @@
+#
+# Using Pentesting Tool.
+#
+
 from pymetasploit3.msfrpc import MsfRpcClient
 import time
 import json
