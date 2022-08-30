@@ -246,8 +246,8 @@ if __name__ == '__main__':
 
 
         # Print results
-        #print("--------------------------------------------------------------------------------")
-        print("AutoPentest-DRL: Optimal attack path was computed successfully")
+        #print("-----------------------------------------------------")
+        print("DRL-AP: Optimal attack path was computed successfully")
         print("                 (labels match 'mulval_result/AttackGraph.pdf')")
         for i in all_paths[state_path]:
             # Add 1 to match label values in MulVAL attack graph
